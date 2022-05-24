@@ -9,6 +9,7 @@
 #### Requirements
 * Java 11.0
 * Mongo (I use version 5.0.8)
+* Maven 3.8.5
 * Docker (I use version 20.10.11)
 * Postman
 
