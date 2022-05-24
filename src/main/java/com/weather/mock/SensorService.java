@@ -44,7 +44,8 @@ public class SensorService {
     }
 
     public String getSensorByDate(int sensorNum, Integer days) {
-
+        int avgTemp = 0;
+        int avgHumidity = 0;
         Sensor sensor = sensorRepository.findSensorBySensorNum(sensorNum).orElseThrow(() -> new IllegalStateException(
                 "Sensor not Found: Invalid Sensor Number"));
 
@@ -53,7 +54,6 @@ public class SensorService {
 
         for(int i =0; i < sensor.getWeatherDataList().size(); i++)
         {
-            System.out.println(sensor.getWeatherDataList().size());
             Duration duration = Duration.between(now.atStartOfDay(), sensor.getWeatherDataList().get(i).getDate().atStartOfDay());
             long diff = Math.abs(duration.toDays());
 
@@ -61,15 +61,27 @@ public class SensorService {
                 System.out.println("Days not specified");
                 output += ("\n" + "Latest Data is from is: \n"
                         + sensor.getWeatherDataList().get(sensor.getWeatherDataList().size() -1));
+                avgTemp += sensor.getWeatherDataList().get(sensor.getWeatherDataList().size() -1).getTemperature();
+                avgHumidity += sensor.getWeatherDataList().get(sensor.getWeatherDataList().size() -1).getHumidity();
                 break;
             }
             else{
+                avgTemp += sensor.getWeatherDataList().get(i).getTemperature();
+                avgHumidity += sensor.getWeatherDataList().get(i).getHumidity();
+
                 if(days != null && days >= diff) {
                     output += ("\n" + diff + " day(s) ago " + " Data was: \n"
                             + sensor.getWeatherDataList().get(i));
                 }
             }
         }
+        if(days != null){
+            avgTemp = avgTemp/sensor.getWeatherDataList().size();
+            avgHumidity = avgHumidity/sensor.getWeatherDataList().size();
+        }
+
+        output += "\nAverage Temperature: " + avgTemp;
+        output += "\nAverage Humidity: " + avgHumidity;
         return output;
     }
 }
