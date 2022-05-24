@@ -68,7 +68,7 @@ public class SensorServiceTest {
 	}
 
 	@Test
-	void GetSensorById() throws Exception {
+	void GetSensorByIdTest() throws Exception {
 		List<Sensor> sensors = new ArrayList<>();
 		sensors.add(sensor1);
 		sensors.add(sensor2);
@@ -85,7 +85,7 @@ public class SensorServiceTest {
 	}
 
 	@Test
-	void getSensorByDate() throws Exception {
+	void getSensorByDateTest() throws Exception {
 
 		String output = "Sensor 1 has the following Data in the last 7:\n" +
 				"1 day(s) ago  Data was: \n" +
