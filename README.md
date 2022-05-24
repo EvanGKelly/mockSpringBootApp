@@ -48,10 +48,10 @@ Alternatively you could run the containers by using the IntelliJ UI.
   1. Select `Get` Option
   2. Input following url ```http://localhost:8080/api/v1/sensors/sensorByDate?sensorNum=1&date=7```
   3. Parameter `date` is how many days old the sensors that return can be. e.g. 7 days old
-  4. Returns a String which contains all Weather Data relevant to the sensor and the date along woth Average temp and humidity of that sensor
+  4. Returns a String which contains all Weather Data relevant to the sensor and the date along with Average temp and humidity of that sensor
   5. If date is not included just returns the most recent data.
   
-* Create `New` Senor:
+* Create `New` Sensor:
   1. Select `Post` Option
   2. Input following url ```http://localhost:8080/api/v1/sensors```
   3. In the body of request include:
