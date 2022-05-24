@@ -6,7 +6,6 @@
 ***
 
 ### To run this application you wil need
-#### Requirements
 * Java 11.0
 * Mongo (I use version 5.0.8)
 * Maven 3.8.5
@@ -23,14 +22,15 @@
 
 ```
 Alternatively you could run the containers by using the IntelliJ UI.
-![](../../Screenshot 2022-05-24 at 19.16.36.png)
+***<img width="497" alt="Screenshot 2022-05-24 at 19 16 36" src="https://user-images.githubusercontent.com/47178446/170112766-7b132771-d5ad-4f25-ad26-98b217d51d17.png">
 
 2. Then run the main method in ```MockApplication.java```
 3. From here you are now ready to make requests to the RestAPI
 
 # Runnning the Http Requests with Postman
 
-***
+
+
 * Get All Sensors: 
   1. Select `Get` Option
   2. Input following url ```http://localhost:8080/api/v1/sensors/allSensors```
@@ -48,7 +48,7 @@ Alternatively you could run the containers by using the IntelliJ UI.
   1. Select `Get` Option
   2. Input following url ```http://localhost:8080/api/v1/sensors/sensorByDate?sensorNum=1&date=7```
   3. Parameter `date` is how many days old the sensors that return can be. e.g. 7 days old
-  4. Returns a String which contains all Weather Data relevant to the sensor and the date
+  4. Returns a String which contains all Weather Data relevant to the sensor and the date along woth Average temp and humidity of that sensor
   5. If date is not included just returns the most recent data.
   
 * Create `New` Senor:
