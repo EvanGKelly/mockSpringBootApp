@@ -20,41 +20,4 @@ public class MockApplication {
 		SpringApplication.run(MockApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner runner(SensorRepository repository){
-		return args -> {
-			WeatherData wd = new WeatherData(25, 21);
-
-			List<WeatherData> wdList = new ArrayList<>();
-
-			wdList.add(wd);
-			Sensor sensor = new Sensor(6,"Ireland", "Cavan", wdList);
-
-			repository.findSensorBySensorNum(sensor.getSensorNum()).ifPresentOrElse(s -> {
-				System.out.println("Already exists");
-			}, () -> {
-				System.out.println("Inserting " + sensor);
-				repository.insert(sensor);
-			});
-
-//			Query query = new Query();
-//			query.addCriteria(Criteria.where("sensorNum").is(sensor.getSensorNum()));
-//
-//			List<Sensor> sensors = mongoTemplate.find(query, Sensor.class);
-//
-//			if(sensors.size() > 1){
-//				throw new IllegalStateException("Found existing doc");
-//			}
-//
-//			if(sensors.isEmpty()){
-//				System.out.println("Inserting the sensor " + sensor);
-//				repository.insert(sensor);
-//
-//			}else{
-//				System.out.println(sensor + "Already in db");
-//			}
-
-		};
-	}
-
 }

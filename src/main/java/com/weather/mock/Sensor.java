@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Data
+@Data // Prevents boiler plate code getters/setters
 @Document
 public class Sensor {
     @Id
@@ -25,6 +25,7 @@ public class Sensor {
         this.weatherDataList = weatherDataList;
     }
 
+    // Adds Weather data to Sensor
     public void addWeatherData(WeatherData weatherData){
         weatherDataList.add(weatherData);
     }

@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+// This class contains all business logic for the application
+// Separate from the Controller
 @AllArgsConstructor
 @Service
 public class SensorService {
@@ -15,7 +17,6 @@ public class SensorService {
     private final SensorRepository sensorRepository;
 
     public List<Sensor> getAllSensors() {
-        System.out.println("Here");
         return sensorRepository.findAll();
     }
 

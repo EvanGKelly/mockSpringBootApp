@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+// Controller for access endpoints
 @RestController
 @AllArgsConstructor //  reduces boiler plate code e.g constructor
 @RequestMapping("api/v1/sensors")
@@ -35,7 +36,6 @@ public class SensorController {
 
     @PutMapping
     public void updateWeatherData(@RequestParam int sensorNum, @RequestBody WeatherData weatherData){
-        System.out.println("updating sensor " + weatherData);
         sensorService.updateWeatherData(sensorNum, weatherData);
     }
 }

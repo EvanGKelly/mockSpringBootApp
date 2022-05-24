@@ -15,11 +15,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(SensorController.class)
 public class SensorServiceTest {
+
+	// Autowired used to injecct a bean when class is created
 	@Autowired
 	private MockMvc mockMvc;
 	@Autowired
 	ObjectMapper mapper;
 
+	// MockBean to add mocked objects
 	@MockBean
 	SensorRepository sensorRepository;
 
@@ -27,19 +30,22 @@ public class SensorServiceTest {
 	SensorService sensorService;
 
 	static WeatherData wd;
+	static WeatherData wd2;
 	static List<WeatherData> wdList;
 	static Sensor sensor1;
 	static Sensor sensor2;
 	static Sensor sensor3;
 
 
+	// Runs before any test to initialize sensors and weatherdata
 	@BeforeAll
 	 public static void init(){
 		wd = new WeatherData(25, 21);
+		wd2 = new WeatherData(30, 18);
 
 		wdList = new ArrayList<>();
-
 		wdList.add(wd);
+		wdList.add(wd2);
 
 		sensor1 =  new Sensor(1,"Ireland", "Galway", wdList);
 		sensor2 =  new Sensor(2,"Ireland", "Dublin", wdList);
@@ -80,16 +86,6 @@ public class SensorServiceTest {
 
 	@Test
 	void getSensorByDate() throws Exception {
-		List<Sensor> sensors = new ArrayList<>();
-		sensors.add(sensor1);
-		sensors.add(sensor2);
-		sensors.add(sensor3);
-
-		final String expectedResponse = "Sensor 1 has the following Data in the last 7:\n" +
-				"1 day(s) ago  Data was: \n" +
-				"WeatherData(humidity=25, temperature=19, date=2022-05-23)\n" +
-				"1 day(s) ago  Data was: \n" +
-				"WeatherData(humidity=100, temperature=40, date=2022-05-23)";
 
 		String output = "Sensor 1 has the following Data in the last 7:\n" +
 				"1 day(s) ago  Data was: \n" +
@@ -103,6 +99,6 @@ public class SensorServiceTest {
 						.param("sensorNum", String.valueOf(1))
 						.param("date", String.valueOf(7)))
 				.andExpect(status().isOk())
-				.andExpect(content().string(expectedResponse));
+				.andExpect(content().string(output));
 	}
 }

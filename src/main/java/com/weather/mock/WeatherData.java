@@ -17,6 +17,9 @@ public class WeatherData {
         this.date = LocalDate.now();
     }
 
+
+    // Getters / Setters
+
     public int getHumidity() {
         return humidity;
     }
