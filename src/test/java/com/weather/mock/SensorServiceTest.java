@@ -7,10 +7,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(SensorController.class)
@@ -101,4 +103,16 @@ public class SensorServiceTest {
 				.andExpect(status().isOk())
 				.andExpect(content().string(output));
 	}
+
+	@Test
+	void createNewSensor() throws Exception {
+		Sensor sensor4 =  new Sensor(4,"Ireland", "Donegal", wdList);
+
+		String input = mapper.writeValueAsString(sensor4);
+
+		 this.mockMvc.perform(post("/api/v1/sensors")
+						 .contentType(MediaType.APPLICATION_JSON).content(input))
+				         .andExpect(status().isOk());
+	}
+
 }
